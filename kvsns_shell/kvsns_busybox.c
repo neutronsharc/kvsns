@@ -33,7 +33,12 @@ int main(int argc, char *argv[])
 	cred.uid = getuid();
 	cred.gid = getgid();
 
-	strncpy(exec_name, basename(argv[0]), MAXPATHLEN);
+	if (argc > 1) {
+      strncpy(exec_name, basename(argv[1]), MAXPATHLEN);
+	} else {
+      strncpy(exec_name, basename(argv[0]), MAXPATHLEN);
+    }
+	printf("run cmd=%s\n", exec_name);
 
 	rc = kvsns_start(KVSNS_DEFAULT_CONFIG);
 	if (rc != 0) {
